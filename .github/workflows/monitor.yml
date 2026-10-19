@@ -1,21 +1,17 @@
-name: Production Monitor
+name: Automated API tests using Postman CLI
 
-on:
-  schedule:
-    - cron: '0 * * * *' # Chạy mỗi 1 giờ
-  workflow_dispatch: # Cho phép bấm chạy bằng tay trên giao diện
+on: push
 
 jobs:
-  monitor-api:
+  automated-api-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Cài đặt Postman CLI
+      - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
-      - name: Đăng nhập Postman
+      - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-      - name: Chạy kịch bản Monitor trực tiếp từ Cloud
-        # Thay ID của Collection Monitor và ID của Environment vào đây
+      - name: Run API tests
         run: |
           postman collection run "59052880-7475d1d5-8175-401a-86a7-8b08402bcdd6"
