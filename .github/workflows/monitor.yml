@@ -14,7 +14,7 @@ jobs:
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
       - name: Đăng nhập Postman
-        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+        run: postman login --with-api-key ${{ secrets.thkei }}
       - name: Chạy kịch bản Monitor trực tiếp từ Cloud
         # Thay ID của Collection Monitor và ID của Environment vào đây
         run: |
