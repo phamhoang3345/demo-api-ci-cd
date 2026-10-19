@@ -1,19 +1,20 @@
-name: Restful-Booker CI Pipeline 
-on: [push, pull_request] # Pipeline kích hoạt khi có ai đó đẩy code lên 
-jobs: 
-api-testing: 
-runs-on: ubuntu-latest # Chạy trên một máy chủ Linux ảo 
-steps: - name: 1. Checkout mã nguồn 
-uses: actions/checkout@v4 - name: 2. Cài đặt Node.js 
-uses: actions/setup-node@v4 
-with: 
-71ITSE41203 
-node-version: '18' - name: 3. Cài đặt công cụ Newman (Postman CLI) 
-run: npm install -g newman - name: 4. Chạy bộ Test tự động 
-# Lệnh này sẽ giả lập việc bấm "Run Collection" như đã làm trên máy cá 
-nhân 
-run: 
-newman 
-run 
-RestfulBooker.postman_collection.json 
-RestfulBooker.postman_environment.json
+name: Restful-Booker CI Pipeline
+
+on: [push, pull_request] # Pipeline kích hoạt khi có ai đó đẩy code lên[cite: 6]
+
+jobs:
+  api-testing:
+    runs-on: ubuntu-latest # Chạy trên một máy chủ Linux ảo[cite: 7]
+    steps:
+      - name: 1. Checkout mã nguồn
+        uses: actions/checkout@v4
+      - name: 2. Cài đặt Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: 3. Cài đặt công cụ Newman (Postman CLI)
+        run: npm install -g newman
+      - name: 4. Chạy bộ Test tự động
+        # Lệnh này sẽ giả lập việc bấm "Run Collection" như đã làm trên máy cá nhân[cite: 6, 7]
+        run: |
+          newman run RestfulBooker.postman_collection.json -e RestfulBooker.postman_environment.json
